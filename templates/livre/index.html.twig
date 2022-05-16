@@ -1,0 +1,181 @@
+{% extends 'basehome.html.twig' %}
+{% block body %}
+
+	<!-- MENU Start
+       ================================================== -->
+
+
+
+
+
+
+
+
+	<!-- SLIDER Start
+    ================================================== -->
+	<section id="slider-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div id="slider" class="">
+						<img src="{{asset('images/slider.jpeg')}}" alt="" />
+
+					</div>	<!-- End of /.nivoslider -->
+				</div>	<!-- End of /.col-md-12 -->
+			</div>	<!-- End of /.row -->
+		</div>	<!-- End of /.container -->
+	</section> <!-- End of Section -->
+
+
+	<!-- CATAGORIE Start
+    ================================================== -->
+
+
+
+	<section id="catagorie">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="block">
+						<div class="block-heading">
+							<h2>Newest Books</h2>
+						</div>
+						<div class="row">
+							{% for livre in b %}
+								<div class="col-sm-6 col-md-4">
+									<div class="thumbnail">
+										<a class="catagotie-head" href="blog-single.html">
+											<img src="{{ asset('pic/' ~ livre.image) }}" alt="" style="width:300px; height: 450px ">
+											<h3>{{ livre.titre }}</h3>
+										</a>
+										<div class="caption">
+											<p{{ livre.description }}></p>
+											<p>
+												<a href="{{ path('addbook',{'id':livre.idLivre}) }}" class="btn btn-default btn-transparent" role="button">
+													<span>Check Book</span>
+												</a>
+											</p>
+										</div>	<!-- End of /.caption -->
+									</div>	<!-- End of /.thumbnail -->
+								</div>	<!-- End of /.col-sm-6 col-md-4 -->
+							{% endfor %}
+						</div>	<!-- End of /.row -->
+					</div>	<!-- End of /.block -->
+				</div>	<!-- End of /.col-md-12 -->
+			</div>	<!-- End of /.row -->
+		</div>	<!-- End of /.container -->
+	</section>	<!-- End of Section -->
+	<center>
+		<h2>Search A book </h2>
+
+		<div class="sidebar-search">
+
+			<div class="input-group custom-search-form">
+
+				<input type="text" id="search" class="form-control" placeholder="Search here">
+			</div>
+			<!-- /input-group -->
+		</div>
+		<ul class="nav" id="side-menu">
+			<li>
+				<a href="app_livre"><span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level" id="entitiesNav">
+				</ul>
+			</li>
+		</ul><br><br><br>
+	</center>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			var searchRequest = null;
+			$("#search").keyup(function() {
+				var minlength = 1;
+				var that = this;
+				var value = $(this).val();
+				var entitySelector = $("#entitiesNav").html('');
+				if (value.length >= minlength ) {
+					if (searchRequest != null)
+						searchRequest.abort();
+					searchRequest = $.ajax({
+						type: "GET",
+						url: "{{ path('ajax_search') }}",
+						data: {
+							'q' : value
+						},
+						dataType: "text",
+						success: function(msg){
+							//we need to check if the value is the same
+							if (value===$(that).val()) {
+								var result = JSON.parse(msg);
+								$.each(result, function(key, arr) {
+									$.each(arr, function(id, value) {
+										if (key === 'posts') {
+											if (id !== 'error') {
+												console.log(value[1]);
+												entitySelector.append('<li><b>'+value[1]+'</b><a href="/book/'+id+'">'+'<img src="/pic/'+value[0]+'" style="width: 50px; height: 50px"/>'+'</a></li>');
+											} else {
+												entitySelector.append('<li class="errorLi">'+value+'</li>');
+											}
+										}
+									});
+								});
+							}
+						}
+					});
+				}
+			});
+		});
+	</script>
+
+
+
+
+	<!-- PRODUCTS Start
+================================================== -->
+
+	<section id="products">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="products-heading">
+						<h2>NEW BOOKS</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				{% for livre in books %}
+					<div class="col-md-3">
+
+						<div class="products">
+							<a >
+								<img src="{{ asset('pic/' ~ livre.image) }}" alt="" style="width:200px; height: 300px ">
+
+							</a>
+							<a href="single-product.html">
+								<h4>  {{ livre.titre }}</h4>
+							</a>
+							<p class="price">Written by : {{ livre.auteur }}</p>
+							<a class="view-link shutter" href="{{ path('addbook',{'id':livre.idlivre}) }}">
+								<i class="fa fa-plus-circle"></i>Consulter</a>
+
+						</div>	<!-- End of /.products -->
+
+					</div> <!-- End Of Col-md-3 -->
+				{% endfor %}
+
+
+
+
+
+
+			</div>	<!-- End of /.row -->
+		</div>	<!-- End of /.container -->
+	</section>	<!-- End of Section -->
+
+
+
+{% endblock %}
+
+

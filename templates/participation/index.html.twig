@@ -1,0 +1,48 @@
+{% extends 'test.html.twig' %}
+
+{% block title %}ParticipationList{% endblock %}
+
+{% block body %}
+<section class="content-area">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p class="card-description">
+
+
+                    {% for message in app.flashes('info') %}
+                <div class="alert alert-success">{{ message }}</div>
+                {% endfor %}
+
+
+                <div class="table-responsive" width="10%">
+
+                    <a href="{{ path('ajoutPar') }}">ajouter</a>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+
+                            <th>Identifiant de la participation</th>
+                            <th>Identifiant de l'événement</th>
+                            <th>Identifiant du participant</th>
+
+                            <th>{% trans %}Update{% endtrans %}</th>
+                            <th>{% trans %}Delete{% endtrans %}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr {% for p in participation %}>
+                            <td>{{ p.idParticipation }}</td>
+                            <td>{{ p.id_event }}</td>
+                            <td>{{ p.idParticipant }}</td>
+                        </tr {% endfor %}>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

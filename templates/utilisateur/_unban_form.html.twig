@@ -1,0 +1,8 @@
+<form method="post" action="{{ path('app_utilisateur_unban', {'idUser': utilisateur.idUser}) }}"
+      onsubmit="return confirm('Are you sure you want to unban this item?');"><input type="hidden" class hidden
+                                                                                     name="_token"
+                                                                                     value="{{ csrf_token('unban' ~ utilisateur.idUser) }}">
+    <button class="btn" {% if utilisateur.type == 'user' %} hidden disabled {% endif %} {% if utilisateur.type == 'admin' %} hidden disabled {% endif %}>
+        Unban
+    </button>
+</form>

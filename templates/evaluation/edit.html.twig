@@ -1,0 +1,54 @@
+{% extends 'book-single.html.twig' %}
+
+{% block title %}Edit Evaluation{% endblock %}
+
+{% block evalutions %}
+    <h1>Edit Evaluation</h1>
+    {{ form_start(form1) }}
+    {{ form_widget(form1) }}
+    <button class="btn">{{ button_label|default('Update') }}</button>
+    {{ form_end(form1) }}
+
+    {{ include('evaluation/_delete_form.html.twig') }}
+{% endblock %}
+{% block avis %}
+    {% for avi in avis %}
+        {% if avi.idUser.idUser==8 %}
+            <div class="media">
+                <img class="media-object pull-left" src="{{ asset('images/author.jpg') }}" alt="...">
+                <div class="media-body">
+                    <h6 class="media-heading">{{ avi.idUser.username}} <a>{{ include('avis/_delete_form.html.twig') }}</a> <a>{{ include('avi/_form.html.twig') }}</a> </h6>
+                    <p>{{ avi.commentaire }}</p>
+                </div>	<!-- End of /.meida-body -->
+            </div>
+        {% else %}
+            <div class="media">
+                <img class="media-object pull-left" src="{{ asset('images/author.jpg') }}" alt="...">
+                <div>
+                    <div class="media-body">
+                        <h6 class="media-heading">{{ avi.idUser.username}} </h6>
+                        <p>{{ avi.commentaire }}</p>
+                    </div>	<!-- End of /.meida-body -->
+                </div>
+            </div>
+        {% endif%}
+    {% endfor %}
+{% endblock %}
+
+{% block comnt %}
+    {{ form_start(form) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {{ form_widget(form) }}
+        </div>
+        <div class="col" id="some-custom-id">
+            <button class="btn">{{ button_label|default('Save') }}</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}

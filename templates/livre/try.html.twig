@@ -1,0 +1,47 @@
+{% extends 'basehome.html.twig' %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class ="col-md-3">
+         {{form_start(form ,{attr: { class: 'filter'}} ) }}
+         {{ form_row(form.q)}}
+         <h4>categories</h4>
+         {{ form_row(form.nomCategorie)}}
+         <button type="submit" class="btn btn-primary w-100">Filtrer</button>
+         {{form_end(form)}}
+
+        </div>
+    <div class="col-md-9">
+        <div class="grid">
+         
+            {% for livre in books %}
+				<div class="col-md-4">
+                
+					<div class="products">
+						<a >
+							<img src="{{ asset('pic/' ~ livre.image) }}" alt="" style="width:200px; height: 300px ">
+                           
+						</a>
+						<a href="single-product.html">
+							<h4>  {{ livre.titre }}</h4>
+						</a>
+						<p class="price">Written by : {{ livre.auteur }}</p>
+                        <div>
+                        {% for c in livre.idCategorie %}
+                        <em class ="text-muted text-primary text-italic">#{{c.nomCategorie}}</em>
+                        {% endfor %}
+                        </div>
+						<a class="view-link shutter" href="{{ path('addbook',{'id':livre.idlivre}) }}">
+							<i class="fa fa-plus-circle"></i>Consulter</a>
+							
+					</div>	<!-- End of /.products -->
+                     
+				</div> <!-- End Of Col-md-3 -->
+              {% endfor %}
+
+         </div>
+     </div>
+    </div>
+    
+</div>
+{% endblock %}       

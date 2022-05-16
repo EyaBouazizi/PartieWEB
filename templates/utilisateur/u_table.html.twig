@@ -1,0 +1,23 @@
+{% for utilisateur in utilisateurs %}
+    <tr>
+        <td>{{ utilisateur.idUser }}</td>
+        <td>{{ utilisateur.email }}</td>
+        <td>{{ utilisateur.username }}</td>
+        <td>{{ utilisateur.password | length > 15 ? utilisateur.password|slice(0, 15) ~ '...' : utilisateur.password }}</td>
+        <td>{{ utilisateur.nomPrenom }}</td>
+        <td>{{ utilisateur.age ? utilisateur.age|date('Y-m-d') : '' }}</td>
+        <td>{{ utilisateur.type }}</td>
+        <td>
+            <a href="{{ path('app_utilisateur_show', {'idUser': utilisateur.idUser}) }}">Afficher</a>
+            <a href="{{ path('app_utilisateur_edit', {'idUser': utilisateur.idUser}) }}">Modifier</a>
+        </td>
+        <td>
+            {{ include('utilisateur/_ban_form.html.twig') }}
+            {{ include('utilisateur/_unban_form.html.twig') }}
+        </td>
+    </tr>
+{% else %}
+    <tr>
+        <td colspan="8">no records found</td>
+    </tr>
+{% endfor %}

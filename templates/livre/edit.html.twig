@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">update</h5>
+
+            {{ form_start(f,{attr:{novalidate:'novalidate'}}) }}
+            <label for="inputText" class="col-sm-4 col-form-label">Titre</label>
+            <div class="col-sm-10">
+                {{ form_widget(f.titre,{'attr':{'class':'form-control'}}) }}
+
+            </div>
+            {{ form_errors(f.titre,{'attr':{'class':'text-danger'}}) }}
+
+
+            <label for="inputText" class="col-sm-4 col-form-label">Auteur</label>
+            <div class="col-sm-10">
+                {{ form_widget(f.auteur,{'attr':{'class':'form-control'}}) }}
+
+            </div>
+            {{ form_errors(f.auteur,{'attr':{'class':'text-danger'}}) }}
+
+            <div class="row mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label">Image Upload</label>
+                <div class="col-sm-10">
+                    {{ form_widget(f.image,{'attr':{'class':'form-control'}}) }}
+
+                </div>
+            </div>
+            <label for="inputText" class="col-sm-4 col-form-label">Description</label>
+            <div class="col-sm-10">
+                {{ form_widget(f.description,{'attr':{'class':'form-control'}}) }}
+
+            </div>
+            <label for="inputText" class="col-sm-4 col-form-label">Text book</label>
+            <div class="col-sm-10">
+                {{ form_widget(f.text_livre,{'attr':{'class':'form-control'}}) }}
+
+            </div>
+
+            <label for="inputText" class="col-sm-4 col-form-label">categorie</label>
+            <div class="col-sm-10">
+                {{ form_widget(f.idCategorie,{'attr':{'class':'form-control'}}) }}
+
+            </div>
+            {{ form_errors(f.idCategorie,{'attr':{'class':'text-danger'}}) }}
+
+
+            </br>
+            </br>
+
+            <div class="col-sm-10" style="display: flex;align-items: center;justify-content: center">
+
+                {{ form_widget(f.ajouter,{'attr':{'class':'btn btn-primary'}}) }}
+            </div>
+            {{ form_end(f) }}
+
+
+
+        </div>
+    </div>
+{% endblock %}
+

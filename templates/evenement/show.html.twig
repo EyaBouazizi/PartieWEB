@@ -1,0 +1,43 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Evenement{% endblock %}
+
+{% block body %}
+    <h1>Evenement</h1>
+
+    {#  {{ include('evenement/_delete_form.html.twig') }} #}
+    <table class="table">
+        <tbody><tr>
+            <th>Evenement Image</th>
+            <td><img src="{{ asset('AdminPart/images/' ~ evenement.image) }}"
+                     alt="" style="width:200px; height: 200px "></td>
+        </tr>
+            <tr>
+                <th >Identifiant event</th>
+                <td>{{ evenement.id_event }}</td>
+            </tr>
+            <tr>
+                <th>Evenement name</th>
+                <td>{{ evenement.event_name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ evenement.description }}</td>
+            </tr>
+            <tr>
+                <th>Evenement date</th>
+                <td>{{ evenement.event_date ? evenement.event_date|date('Y-m-d') : '' }}</td>
+            </tr>
+
+     <tr>
+         <th>Club</th>
+        <td>{{ evenement.club }}</td>
+    </tr>
+        </tbody>
+    </table>
+
+
+
+    <B><a style="margin-left: 1050px" href="{{ path('evenement_index') }}">Retour </a></B>
+
+{% endblock %}

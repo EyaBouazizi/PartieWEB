@@ -1,0 +1,96 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Club{% endblock %}
+
+
+
+
+
+{% block body %}
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v13.0" nonce="KG8kiSFO"></script>
+    <h1>Club</h1>
+
+    {{ include('club/_delete_form.html.twig') }}
+
+    <a class="view-link shutter" href="{{ path('new_evenement_user', {'id': club.id} ) }}">
+        <i class="fa fa-plus-circle"></i>Organiser un événement</a>
+
+    <a href="{{ path('app_usrevent_showall', {'id': club.id})}}" class="btn btn-default btn-transparent" role="button">
+        <button href="{{ path('app_usrevent_showall', {'id': club.id}) }}">Cliquer ici pour découvrir nos événements ! </button>
+    </a>
+
+
+  {#  <button><a href="{{ path('app_usrevent_showall', {'id': club.id}) }}">Cliquer ici pour découvrir nos événements !</a></button>
+  #}
+
+    <table style="background-color: white" class="table">
+
+        <tbody>
+        <tr>
+            <th>Club Image</th>
+            <td><img src="{{ asset('UserPart/imgs/' ~ club.imageclb) }}"
+                     alt="" style="width:200px; height: 200px "></td>
+        </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ club.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom_club</th>
+                <td>{{ club.nom_club }}</td>
+            </tr>
+            <tr>
+                <th>Date_creation</th>
+                <td>{{ club.dateCreation ? club.dateCreation|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Club_owner</th>
+                <td>{{ club.club_owner }}</td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+       {# {% set access=1 %}
+        {% if access==1 %} #}
+
+        {% set ac=club.access %}
+        {% if club.access==1 %}
+            <tr>
+                <th>Type Club</th>
+                <td>Public</td>
+            </tr>
+        <tr>
+
+            <td>  <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>Facebook</h6>
+             <span class="text-secondary"><div class="fb-share-button" data-href={{app.request.uri}} data-layout="box_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div></span>
+            </td>
+        </tr>
+            {% else %}
+                <tr>
+                    <th>Type Club</th>
+                    <td>Privé</td>
+
+
+                </tr>
+                <tr>
+
+                        <B style="margin-left: 200px;">  vous n'avez pas l'accés pour partager ce club ! </B>
+
+                </tr>
+
+        {% endif %}
+
+        </tbody>
+    </table>
+    <B><a href="{{ path('app_club_index') }}">Retour </a></B>
+
+
+
+{% endblock %}

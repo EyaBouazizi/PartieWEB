@@ -1,0 +1,114 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Utilisateur index{% endblock %}
+
+{% block body %}
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+
+
+    <h1>Utilisateur index</h1>
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Utilisateurs</h6>
+            </div>
+            <div class="card-body">
+                <div>
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <div>
+                            <div>
+                                <label>Search:
+                                    <input id="search" type="search" class="form-control form-control-sm"
+                                           placeholder="">
+                                </label></div>
+                        </div>
+                        <tr>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>Nom Utilisateur</th>
+                            <th>Mot de Passe</th>
+                            <th>Nom et Prenom</th>
+                            <th>Date de Naissance</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                            <th>Ban/Unban</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        </tfoot>
+
+
+                        <tbody id="all">
+                        {% for utilisateur in utilisateurs %}
+                            <tr>
+                                <td>{{ utilisateur.idUser }}</td>
+                                <td>{{ utilisateur.email }}</td>
+                                <td>{{ utilisateur.username }}</td>
+                                <td>{{ utilisateur.password | length > 15 ? utilisateur.password|slice(0, 15) ~ '...' : utilisateur.password }}</td>
+                                <td>{{ utilisateur.nomPrenom }}</td>
+                                <td>{{ utilisateur.age ? utilisateur.age|date('Y-m-d') : '' }}</td>
+                                <td>{{ utilisateur.type }}</td>
+                                <td>
+                                    <a href="{{ path('app_utilisateur_show', {'idUser': utilisateur.idUser}) }}">Afficher</a>
+                                    <a href="{{ path('app_utilisateur_edit', {'idUser': utilisateur.idUser}) }}">Modifier</a>
+                                </td>
+                                <td>
+                                    {{ include('utilisateur/_ban_form.html.twig') }}
+                                    {{ include('utilisateur/_unban_form.html.twig') }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="8">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <a href="{{ path('app_utilisateur_new') }}">Create new</a>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#search").keyup(function () {
+                var value = $(this).val();
+                console.log("value : ")
+                $.ajax({
+                    url: "{{ path('searchStudentx') }}",
+                    type: 'GET',
+                    dataType: "json",
+                    data: {
+                        'searchValue': value
+                    },
+                    success: function (data) {
+                        $('#all').empty();
+                        $('#all').html(data.html);
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Reclamation index{% endblock %}
+
+{% block body %}
+    <h1>Reclamation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Etat</th>
+                <th>Date</th>
+                <th>Message</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody id="myTable" >
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.id }}</td>
+                <td>{{ reclamation.titre }}</td>
+                <td>{{ reclamation.etat }}</td>
+                <td>{{ reclamation.dateRec|date('d/m/Y')}}</td>
+                <td>{{ reclamation.message }}</td>
+                <td>
+                    <a href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}">show</a>
+                    <a href="{{ path('app_reclamation_delete', {'id': reclamation.id}) }}">Delete</a>
+                    
+                    {% if reclamation.etat != "Traitée" %}
+                    <a href="{{ path('app_reponse_new', {'id': reclamation.id}) }}">Response</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        {{ knp_pagination_render(reclamations) }}
+    </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+{% endblock %}

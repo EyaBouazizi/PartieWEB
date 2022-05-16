@@ -1,0 +1,14 @@
+{{ form_start(form) }}
+<div class="my-custom-class-for-errors">
+    {{ form_errors(form) }}
+</div>
+
+<div class="row">
+    <div class="col">
+        {{ form_widget(form) }}
+    </div>
+    <div class="col" id="some-custom-id">
+        <button class="btn">{{ button_label|default('Save') }}</button>
+    </div>
+</div>
+{{ form_end(form) }}

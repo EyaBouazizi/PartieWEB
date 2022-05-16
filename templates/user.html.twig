@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>EBook Page</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block stylesheets %}
+        <!-- CSS
+ ================================================ -->
+        <!-- Owl Carousel -->
+
+
+        <link rel="stylesheet" href="{{ asset('UserPart/css/owl.carousel.css')}} ">
+        <!-- bootstrap.min css -->
+        <link rel="stylesheet" href="{{ asset('UserPart/css/bootstrap.min.css')}} ">
+        <!-- Font-awesome.min css -->
+        <link rel="stylesheet" href="{{ asset('UserPart/css/font-awesome.min.css')}} ">
+        <!-- Main Stylesheet -->
+        <link rel="stylesheet" href="{{ asset('UserPart/css/animate.min.css')}} ">
+
+        <link rel="stylesheet" href="{{ asset('UserPart/css/main.css')}} ">
+        <!-- Responsive Stylesheet -->
+    {% endblock %}
+
+    {% block javascripts %}
+        <!-- Js -->
+        <script src="UserPart/js/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="UserPart/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="UserPart/js/jquery.nav.js"></script>
+        <script src="UserPart/js/jquery.sticky.js"></script>
+        <script src="UserPart/js/bootstrap.min.js"></script>
+        <script src="UserPart/js/plugins.js"></script>
+        <script src="UserPart/js/wow.min.js"></script>
+        <script src="UserPart/js/main.js"></script>
+    {% endblock %}
+</head>
+
+{% block header %}
+    <!--
+header-img start
+============================== -->
+    <section id="hero-area">
+        <img style="margin-right: 1000px" class="img-responsive" src="UserPart/images/essai1.jpg" alt="">
+    </section>
+    <!--
+    Header start
+    ============================== -->
+    <nav id="navigation">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <nav class="navbar navbar-default">
+                            <div class="container-fluid">
+                                <!-- Brand and toggle get grouped for better mobile display -->
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    <a class="navbar-brand" href="#">
+                                        <img src="UserPart/images/" alt="Logo">
+                                    </a>
+
+                                </div>
+
+                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                    <ul class="nav navbar-nav navbar-right" id="top-nav">
+                                        <li><a href="#hero-area">Accueil</a></li>
+                                        <li><a href="{{path("app_club_index")}}" >Clubs</a></li>
+                                        <li><a href="#blog">Evenements</a></li>
+                                        <li><a href="#price">menu</a></li>
+                                        <li><a href="#contact-us">Réclamer</a></li>
+                                    </ul>
+                                </div><!-- /.navbar-collapse -->
+                            </div><!-- /.container-fluid -->
+                        </nav>
+                    </div>
+                </div><!-- .col-md-12 close -->
+            </div><!-- .row close -->
+        </div><!-- .container close -->
+    </nav><!-- header close -->
+
+{% endblock %}
+
+<body>
+{% block content %}
+    <!--Slider start
+    ============================== -->
+ <!--
+about-us start
+============================== -->
+    <section id="about-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <img class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="400ms" src="UserPart/images/logooooo.png" alt="cooker-img">
+                        <h1 class="heading wow fadeInUp" data-wow-duration="400ms" data-wow-delay="500ms" >Liste<span>Clubs</span> </br> Bienvenue dans <span>KTEBY</span>
+                        </h1>
+                        <p class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="600ms">
+
+                        <div>
+                            {% block body %}
+
+                        {% endblock %}
+                        </div>
+
+                    </div><!-- .col-md-12 close -->
+            </div><!-- .row close -->
+        </div><!-- .container close -->
+      </div>
+    </section><!-- #call-to-action close -->
+
+
+        {% endblock %}
+
+
+
+
+
+
+</body>
+</html>

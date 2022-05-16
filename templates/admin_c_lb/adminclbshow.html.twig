@@ -1,0 +1,42 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Club{% endblock %}
+
+{% block body %}
+    <h1>Club</h1>
+
+    <table class="table">
+        <tbody>
+        {{ include('admin_c_lb/_delete_form.html.twig') }}
+        <tr>
+        <th>Club Image</th>
+        <td><img src="{{ asset('UserPart/imgs/' ~ club.imageclb) }}"
+                 alt="" style="width:200px; height: 200px "></td>
+        </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ club.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom_club</th>
+            <td>{{ club.nom_club }}</td>
+        </tr>
+        <tr>
+            <th>Date_creation</th>
+            <td>{{ club.dateCreation ? club.dateCreation|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Club_owner</th>
+            <td>{{ club.club_owner }}</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <B><a style="margin-left:1050px" href="{{ path('app_adminclb_index') }}">Retour</a></B>
+
+
+
+{% endblock %}

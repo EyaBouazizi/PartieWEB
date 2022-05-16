@@ -1,0 +1,212 @@
+{% extends 'test.html.twig' %}
+
+
+    {% block stylesheets %}
+        <!-- Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700' rel='stylesheet' type='text/css'>
+
+        <!-- Css -->
+        <link rel="stylesheet" href="{{ asset('UserPart/css/nivo-slider.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('UserPart/css/owl.carousel.css') }}">
+        <link rel="stylesheet" href="{{ asset('UserPart/css/owl.theme.css') }}">
+        <link rel="stylesheet" href="{{ asset('UserPart/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('UserPart/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('UserPart/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('UserPart/css/responsive.css') }}">
+    {% endblock %}
+
+    {% block javascripts %}
+        <!-- jS -->
+        <script src="{{ asset('UserPart/js/jquery.min.js" type="text/javascript') }}"></script>
+        <script src="{{ asset('UserPart/js/bootstrap.min.js" type="text/javascript') }}"></script>
+        <script src="{{ asset('UserPart/js/jquery.nivo.slider.js" type="text/javascript') }}"></script>
+        <script src="{{ asset('UserPart/js/owl.carousel.min.js" type="text/javascript') }}"></script>
+        <script src="{{ asset('UserPart/js/jquery.nicescroll.js') }}"></script>
+        <script src="{{ asset('UserPart/js/jquery.scrollUp.min.js') }}"></script>
+        <script src="{{ asset('UserPart/js/main.js') }}" type="text/javascript"></script>
+    {% endblock %}
+{% block header %}
+
+<!-- TOP HEADER Start
+    ================================================== -->
+
+<section id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <p class="contact-action"><i class="fa fa-phone-square"></i>IN CASE OF ANY QUESTIONS, CALL THIS NUMBER: <strong>+565 975 658</strong></p>
+            </div>
+            <div class="col-md-3 clearfix">
+                <ul class="login-cart">
+                    <li>
+                        <a data-toggle="modal" data-target="#myModal" href="#">
+                            <i class="fa fa-user"></i>
+                            Login
+                        </a>
+                    </li>
+                    <li>
+                        <div class="cart dropdown">
+                            <a data-toggle="dropdown" href="#"><i class="fa fa-shopping-cart"></i>Cart(1)</a>
+                            <div class="dropdown-menu dropup">
+                                <span class="caret"></span>
+                                <ul class="media-list">
+                                    <li class="media">
+                                        <img class="pull-left" src="UserPart/images/product-item.jpg" alt="">
+                                        <div class="media-body">
+                                            <h6>Italian Sauce
+                                                <span>$250</span>
+                                            </h6>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <button class="btn btn-primary btn-sm">Checkout</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <div class="search-box">
+                    <div class="input-group">
+                        <input placeholder="Search Here" type="text" class="form-control">
+                        <span class="input-group-btn">
+					        	<button class="btn btn-default" type="button"></button>
+					      	</span>
+                    </div><!-- /.input-group -->
+                </div><!-- /.search-box -->
+            </div>
+        </div> <!-- End Of /.row -->
+    </div>	<!-- End Of /.Container -->
+
+    <!-- LOGO Start
+    ================================================== -->
+
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="#">
+                        <img src="{{ asset('UserPart/images/logooooo.png') }}" alt="logo">
+                    </a>
+                </div>	<!-- End of /.col-md-12 -->
+            </div>	<!-- End of /.row -->
+        </div>	<!-- End of /.container -->
+    </header> <!-- End of /Header -->
+
+
+
+
+    <!-- MENU Start
+    ================================================== -->
+
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div> <!-- End of /.navbar-header -->
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                	<ul class="nav navbar-nav nav-main">
+		        	<li class="active"><a href="{{ path('app_livre')}}">HOME</a></li>
+					<li><a href="{{ path('try')}}">Description</a></li>
+					<li><a href="{{ path('app_club_index')}}">Clubs</a></li>
+					<li><a href="{{ path('reclamation_index')}}">Reclamation</a></li>
+
+
+
+
+		        </ul> <!-- End of /.nav-main -->
+            </div>	<!-- /.navbar-collapse -->
+        </div>	<!-- /.container-fluid -->
+    </nav>	<!-- End of /.nav -->
+
+    {% endblock %}
+
+{% block title %}Hello UserEventController{% endblock %}
+
+{% block body %}
+    {% set ok=0 %}
+<section id="shop">
+    <h2>Liste Events</h2>
+    <div class="container">
+        <div class="row">
+            {% set totale=0 %}
+            {% for evenement in evenements %}
+                {% set nbp=0 %}
+                {% set particip=0 %}
+            <div class="col-sm-6 col-md-4">
+
+                <div class="thumbnail">
+
+
+
+                    <a><img src="{{ asset('AdminPart/images/' ~ evenement.image) }}"
+                                        alt="" style="width:200px; height: 200px ">
+                                </a>
+                    <h4>{{ evenement.event_name }}</h4>
+                </a>
+
+                <p class="price">{{ evenement.event_date ? evenement.event_date|date('Y-m-d à H:i:s')}}</p>
+
+                        {% for part in parts %}
+
+
+                            {% if( (part.ide==evenement.id_event) )%}
+                                {% set nbp=nbp+1 %}
+                            {% endif %}
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            {% if( (part.idu==app.user.idUser)and(part.ide==evenement.id_event) )%}
+                                {% set particip=1 %}
+                            {% endif %}
+                                                        {% endif %}
+
+                        {% else %}
+                            {% set particip=0 %}
+                        {% endfor %}
+
+                    <p> Nombres participants :   {{ nbp }}/{{evenement.nbrparticiMax}}</p>
+                    <p>
+                        {% if (particip==1) %}
+
+
+                        <a style="margin-left: 130px;" href="{{ path('app_usrevent_show', {'id_event': evenement.id_event})}}" class="btn btn-default btn-transparent" role="button">
+                            <button href="{{ path('app_usrevent_show', {'id_event': evenement.id_event}) }}">Détails </button>
+                        </a>
+
+                        {# <a style="margin-left: 130px;" href="{{ path('evenement_edit', {'id_event': evenement.id_event})}}" class="btn btn-default btn-transparent" role="button">
+                            <button href="{{ path('evenement_edit', {'id_event': evenement.id_event}) }}">Modifier </button>
+                        </a>
+                         #}
+
+</p>
+
+
+                        {% elseif (nbp>=evenement.nbrparticiMax)  %}
+                    <p>Les places sont complets pour ce événement </p>
+                    {% else  %}
+                         <a style="margin-left: 130px;" href="{{ path('rejo', {'ide': evenement.id_event, 'idu': 1})}}" class="btn btn-default btn-transparent" role="button">
+                            <button href="{{ path('rejo', {'ide': evenement.id_event, 'idu': 1}) }}">Participer </button>
+                        </a>
+
+
+                    {% endif %}
+
+                    </p>
+
+                            </div>	<!-- End of /.products -->
+                        </li>
+
+                    </ul>
+            </div>	<!-- End of /.products -->
+            {% endfor %}
+        </div>	<!-- End of /.col-md-3 -->
+
+    </div>	<!-- End of /.row -->
+</section>
+{% endblock %}

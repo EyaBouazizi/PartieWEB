@@ -1,0 +1,23 @@
+<td>{{ utilisateur.idUser }}</td>
+<td>{{ utilisateur.email }}</td>
+<td>{{ utilisateur.username }}</td>
+<td>{{ utilisateur.password | length > 15 ? utilisateur.password|slice(0, 15) ~ '...' : utilisateur.password }}</td>
+<td>{{ utilisateur.nomPrenom }}</td>
+<td>{{ utilisateur.age ? utilisateur.age|date('Y-m-d') : '' }}</td>
+<td>{{ utilisateur.type }}</td>
+
+<form action="{{ path('app_register_confirm') }}" method="post" name="formulario_login">
+    <label for="username">User:</label>
+    <input type="text" id="username" name="_username" value=""/>
+    {{ form_widget(form.btn,{'attr':{'class':'btn btn-primary'}}) }}
+</form>
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+ {% for message in app.flashes('notice') %}
+     <div class="flash-notice">
+         {{ message }}
+     </div>
+ {% endfor %}

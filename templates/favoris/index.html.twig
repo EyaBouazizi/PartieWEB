@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Favoris index{% endblock %}
+
+{% block body %}
+    <h1>Favoris index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>IdFav</th>
+            <th>Livre</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for favori in favoris %}
+            <tr>
+                <td>{{ favori.idFav }}</td>
+                <td>{{ favori.idLivre }}</td>
+                <td>
+                    <a href="{{ path('app_favoris_show', {'idFav': favori.idFav}) }}">show</a>
+                    <a href="{{ path('app_favoris_edit', {'idFav': favori.idFav}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_favoris_new') }}">Create new</a>
+{% endblock %}

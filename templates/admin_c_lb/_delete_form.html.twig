@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('app_clbadmin_delete', {'id': club.id}) }}"
+      onsubmit="return confirm('Vous êtes sur de supprimer ce club ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ club.id) }}">
+    <button class="btn">Supprimer</button>
+</form>

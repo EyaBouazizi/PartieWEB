@@ -1,0 +1,15 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Index Avis{% endblock %}
+
+{% block avis %}
+    {% for avi in avis %}
+            <div class="media">
+                <img class="media-object pull-left" src="{{ asset('images/author.jpg') }}" alt="...">
+                <div class="media-body">
+                    <h6 class="media-heading">{{ avi.idUser.username}} <a class="btn btn-danger" href="{{ path('avis_delete_admin',{'idAvis':avi.idAvis})}}">Delete</a> </h6>
+                    <p>{{ avi.commentaire }}</p>
+                </div>	<!-- End of /.meida-body -->
+            </div>
+    {% endfor %}
+{% endblock %}

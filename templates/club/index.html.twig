@@ -1,0 +1,87 @@
+{% extends 'basehome.html.twig' %}
+
+{% block title %}Club List{% endblock %}
+
+{% block body %}
+
+
+    <!-- JavaScript Dom -->
+    <script type="text/javascript">
+        function sortdiv() {
+            var container = document.getElementById("list");
+            var elements = container.childNodes;
+            // stockage temporaire des éléments qui seront triés
+            var sortMe = [];
+            // itérer sur tous les éléments de <div id="list">
+            for (var i=0; i<elements.length; i++) {
+                // ignorer les nœuds sans ID
+                if (!elements[i].id) {
+                    continue;
+                }
+                var sortPart = elements[i].id.split("-");
+                // n'ajoute l'élément pour le tri que s'il contient un tiret
+                if (sortPart.length > 1) {
+                    sortMe.push([ 1 * sortPart[1] , elements[i] ]);
+                }
+            } // trie le tableau sortMe, les éléments avec l'ID le plus haut seront d'abord
+            sortMe.sort(function(x, y) {
+                return  y[0] - x[0];
+            });
+            // enfin ajouter à nouveau les éléments triés, l'ancien élément sera déplacé vers
+            // la nouvelle position
+            for (var i=0; i<sortMe.length; i++) {
+                // rappelez-vous que le deuxième élément du tableau contient l'élément lui-même
+                container.appendChild(sortMe[i][1]);
+            }
+
+        }
+    </script>
+
+
+    <div class="row">
+        <a style="color:black" class="view-link shutter" href="{{ path('app_club_new') }}">
+            <i class="fa fa-plus-circle"></i>Ajouter un club</a>&nbsp;
+        <div id="button"><B><a style="font-size: medium;margin-left: 1180px;" href="#" onclick="sortdiv();">Trier ces Clubs</a></B></div>&nbsp;&nbsp;&nbsp;
+        <div id="list" style="margin-left: 150px;">
+        {% for club in clubs %}
+            {% set nbe=0 %}
+
+            {% for envt in events %}
+                {% if (club.id== envt.club.id ) %}
+                {% set nbe=nbe+1 %}
+                {% endif %}
+            {%  endfor %}
+            <div id="categorie5.1-{{ nbe }}" class="col-sm-6 col-md-4" style="width: 400px;height: 500px;">
+
+                <div class="thumbnail">
+
+                    <a class="catagotie-head" href="{{ path('app_club_show', {'id': club.id})}}">
+                        <img src="{{ asset('UserPart/imgs/' ~ club.imageclb) }}"
+                             alt="" style="width: 355px;height: 250px;  ">
+                        <h3>Nom du Club : {{ club.nom_club }}</h3>
+                        <h4>Admin Club : {{ club.club_owner }}</h4>
+                    </a>
+                    <div class="caption">
+                        <p>Date de creation : {{ club.dateCreation ? club.dateCreation|date('Y-m-d') : '' }} </p>
+
+                        <p>Nombre des evenements :  {{ nbe }} </p>
+                        <p>
+                            <a href="{{ path('app_club_show', {'id': club.id})}}" class="btn btn-default btn-transparent" role="button">
+                                <button href="{{ path('app_usrevent_showall', {'id': club.id}) }}">Rejoindre </button>
+                            </a>
+                            <a href="{{ path('app_club_delete', {'id': club.id})}}" class="btn btn-default btn-transparent" role="button">
+                                <button href="{{ path('app_club_delete', {'id': club.id}) }}">Supprimer </button>
+                            </a>
+                            <a href="{{ path('app_club_edit', {'id': club.id})}}" class="btn btn-default btn-transparent" role="button">
+                                <button href="{{ path('app_club_edit', {'id': club.id}) }}">Modifier </button>
+                            </a>
+                        </p>
+                    </div>	<!-- End of /.caption -->
+
+                </div>	<!-- End of /.thumbnail -->
+
+            </div>	<!-- End of /.col-sm-6 col-md-4 -->
+        {% endfor %}
+            </div>
+    </div>
+{% endblock %}
