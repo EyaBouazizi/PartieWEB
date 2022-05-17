@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Symfony\Component\serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * Evaluation
  *
@@ -23,6 +23,7 @@ class Evaluation
      * @ORM\Column(name="id_evaluation", type="integer", nullable=false)
 
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      *
      */
     private $idEvaluation;
@@ -46,6 +47,7 @@ class Evaluation
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_livre", referencedColumnName="id_livre")
      * })
+
      */
     private $idLivre;
     private $isEvaluated;

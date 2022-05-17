@@ -16,7 +16,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Validator\Constraints\Json;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-
+/*
+ * @Route("livre")
+ */
 class JsonLivreController extends AbstractController
 {
     /**
@@ -31,7 +33,7 @@ class JsonLivreController extends AbstractController
 
     //LISTE EVENTS
     /**
-     * @Route("/listlivre", name="list_club")
+     * @Route("/listlivre", name="list_livre")
      */
     function  getLivre(){
 
@@ -42,6 +44,8 @@ class JsonLivreController extends AbstractController
             'data' =>$jsonContent,
         ]);*/
         return new Response(json_encode($formatted));
+
+
     }
 
 

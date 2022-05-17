@@ -76,12 +76,12 @@ class Evenement
      */
     private $adresse;
 
-    /**
+    /*
      *
      * @ORM\Column(name="nbrparticipants", type="integer")
      * @Groups("post:read")
-     */
-    private $nbrparticipants=0;
+     *
+    private $nbrparticipants=0;*/
 
     /**
      *
@@ -229,21 +229,21 @@ class Evenement
     */
 
 
-    /**
+    /*
      * @return int
-     */
+     *
     public function getNbrparticipants(): int
     {
         return $this->nbrparticipants;
-    }
+    }*/
 
-    /**
+    /*
      * @param int $nbrparticipants
-     */
+     *
     public function setNbrparticipants(int $nbrparticipants): void
     {
         $this->nbrparticipants = $nbrparticipants;
-    }
+    }*/
 
 
 

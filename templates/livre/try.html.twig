@@ -31,6 +31,8 @@
                         <em class ="text-muted text-primary text-italic">#{{c.nomCategorie}}</em>
                         {% endfor %}
                         </div>
+                        <a class="view-link shutter" href="{{ path('avis_index') }}">
+                            <i class="fa fa-plus-circle"></i>Commenter</a>
 						<a class="view-link shutter" href="{{ path('addbook',{'id':livre.idlivre}) }}">
 							<i class="fa fa-plus-circle"></i>Consulter</a>
 							

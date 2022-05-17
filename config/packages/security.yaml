@@ -31,7 +31,5 @@ security:
   encoders:
     # use your user class name here
     App\Entity\Utilisateur:
-      # Use native password encoder
-      # This value auto-selects the best possible hashing algorithm
-      # (i.e. Sodium when available).
-      algorithm: auto
+      algorithm: bcrypt
+      cost:    12

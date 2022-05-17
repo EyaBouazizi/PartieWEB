@@ -73,23 +73,30 @@ class AvisMobileController extends AbstractController
     }
 /*http://127.0.0.1:8001/Avis/addAvisJSON/new/?commentaire=bonuit*/
 
-/**
- * @Route("/addAvisJSON/new/", name="addAvisJSON", methods={"GET", "POST"})
- */
-public function addAvisJSON(Request $request, NormalizerInterface $Normalizer)
-{
-    $em = $this->getDoctrine()->getManager();
-    $avi = new Avis();
-    $avi->setCommentaire($request->get('commentaire'));
-    $avi->setIdLivre($request->get('id_livre'));
-    $avi->setIdUser($request->get('id_user'));
+    /**
+     * @Route("/addAvisJSON/new/", name="addAvisJSON", methods={"GET", "POST"})
+     */
+    public function addAvisJSON(Request $request, NormalizerInterface $Normalizer,LivreRepository $repo1,UtilisateurRepository $repo2)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $avi = new Avis();
+        $avi->setCommentaire($request->get('commentaire'));
+        //$avi->setIdLivre($request->get('id_livre'));
+        //$avi->setIdUser($request->get('id_user'));
+        // $avi->setIdUser($idUser);
+        //$avi->setIdLivre($livre);
 
-    $em->persist($avi);
-    $em->flush();
-    $jsonContent=$Normalizer->normalize($avi,'json',['groups'=>'post:read']);
-    return new Response(json_encode($jsonContent));
-    /*http://127.0.0.1:8000/clb/addClubJSON/new/?nom_club=nejet&club_owner=nojnoj&access=public&imageclb=f780fa4f92fa335b578ffe4c38829d50.png*/
-}
+        $livre=$repo1->find(29);
+        $idUser=$repo2->find(8);
+        $avi->setIdUser($idUser);
+        $avi->setIdLivre($livre);
+
+        $em->persist($avi);
+        $em->flush();
+        $jsonContent=$Normalizer->normalize($avi,'json',['groups'=>'post:read']);
+        return new Response(json_encode($jsonContent));
+        //http://127.0.0.1:8001/Avis/addAvisJSON/new/?commentaire=salem&livre=29&idUser=8
+    }
 
     //UPDATE Avis
 
